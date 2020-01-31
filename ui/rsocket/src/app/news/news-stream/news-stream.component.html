@@ -1,0 +1,5 @@
+<div  *ngFor="let item of newsItems; index as i;">
+  <app-news-item [id]="item.id" [title]="item.title" [subtitle]="item.subtitle" [image]="item.image" [content]="item.content">
+
+  </app-news-item>
+</div>
