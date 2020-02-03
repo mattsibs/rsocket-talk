@@ -7,19 +7,21 @@ import {RsocketModule} from "./rsocket/rsocket.module";
 import {MessagesModule} from "./messages/messages.module";
 import {NewsModule} from "./news/news.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MonitoringModule} from "./monitoring/monitoring.module";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    RsocketModule,
-    MessagesModule,
-    NewsModule,
-    BrowserAnimationsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        RsocketModule,
+        MessagesModule,
+        NewsModule,
+        BrowserAnimationsModule,
+        MonitoringModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

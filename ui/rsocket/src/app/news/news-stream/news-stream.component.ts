@@ -10,49 +10,17 @@ import {NewsService} from "../news.service";
 })
 export class NewsStreamComponent implements OnInit {
 
-  newsItems: NewsItem[] = [
-    {
-      id: '1',
-      title: 'Shiba Inu',
-      subtitle: 'Dog Breed',
-      image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      content: 'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.\n' +
-        ' A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally\n' +
-        'bred for hunting.'
-    },
-    {
-      id: '1',
-      title: 'Shiba Inu',
-      subtitle: 'Dog Breed',
-      image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      content: 'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.\n' +
-        ' A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally\n' +
-        'bred for hunting.'
-    },
-    {
-      id: '1',
-      title: 'Shiba Inu',
-      subtitle: 'Dog Breed',
-      image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      content: 'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.\n' +
-        ' A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally\n' +
-        'bred for hunting.'
-    },
-    {
-      id: '1',
-      title: 'Shiba Inu',
-      subtitle: 'Dog Breed',
-      image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      content: 'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.\n' +
-        ' A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally\n' +
-        'bred for hunting.'
-    },
-  ];
+  private maxNewsItems = 4;
+
+  newsItems: NewsItem[] = [];
 
   constructor(private newsService: NewsService) { }
 
   ngOnInit() {
     this.newsService.news().subscribe(newsItem => {
+      if (this.newsItems.length > this.maxNewsItems) {
+        this.newsItems.shift();
+      }
       this.newsItems.push(newsItem);
     })
   }
