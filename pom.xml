@@ -12,12 +12,14 @@
     <modules>
         <module>server</module>
         <module>ui</module>
+        <module>social</module>
+        <module>middleware</module>
+        <module>client</module>
     </modules>
 
     <properties>
         <spring-boot-dependencies.version>2.2.0.M6</spring-boot-dependencies.version>
     </properties>
-
 
     <build>
         <pluginManagement>
@@ -70,6 +72,13 @@
                         <artifactId>junit-vintage-engine</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <scope>runtime</scope>
+                <version>1.4.199</version>
             </dependency>
 
             <dependency>

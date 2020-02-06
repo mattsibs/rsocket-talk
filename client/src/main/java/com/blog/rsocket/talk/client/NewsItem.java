@@ -1,5 +1,6 @@
-package com.blog.rsocket.talk.server.events;
+package com.blog.rsocket.talk.client;
 
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class NewsItem {
-    private String id;
+    private UUID id;
     private String title;
     private String subtitle;
     private String image;

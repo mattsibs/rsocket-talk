@@ -6,7 +6,7 @@ import {NewsService} from "../news.service";
 @Component({
   selector: 'app-news-stream',
   templateUrl: './news-stream.component.html',
-  styleUrls: ['./news-stream.component.scss']
+  styleUrls: ['./news-stream.component.scss'],
 })
 export class NewsStreamComponent implements OnInit {
 
@@ -24,7 +24,5 @@ export class NewsStreamComponent implements OnInit {
       this.newsItems.push(newsItem);
     })
   }
-
-
 
 }

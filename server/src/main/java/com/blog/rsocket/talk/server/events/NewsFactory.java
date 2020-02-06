@@ -1,10 +1,8 @@
 package com.blog.rsocket.talk.server.events;
 
-import io.rsocket.internal.jctools.util.RangeUtil;
+import com.blog.rsocket.talk.client.NewsItem;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.TreeMap;
 import java.util.UUID;
 
 public class NewsFactory {
@@ -19,13 +17,13 @@ public class NewsFactory {
   private static final List<String> people =
       List.of("Donald Trump", "Boris Johnson", "Ainsley Harriot", "JK Rowling");
 
-  private static final List<String> verbs = List.of("cooks", "tackles");
+  private static final List<String> verbs = List.of("cooks", "tackles", "legislates", "defends", "loves");
 
   private static final List<String> objects =
-      List.of("the defecit", "a turkey", "his goose", "school child");
+      List.of("the defecit", "a turkey", "his goose", "school child", "aligator", "baby shark");
 
   private static final List<String> location =
-      List.of("in the Bahamas", "on the toilet", "eating a turkey leg");
+      List.of("in the Bahamas", "on the toilet", "eating a turkey leg", "at 3am", "in the club");
 
   public static NewsItem random() {
       Random random = new Random();
@@ -36,7 +34,7 @@ public class NewsFactory {
 
       String title = String.format("%s %s %s %s", people.get(randomPerson), verbs.get(randomVerb), objects.get(randomObject), location.get(randomLocation));
 
-    return NewsItem.builder().id(UUID.randomUUID().toString())
+    return NewsItem.builder().id(UUID.randomUUID())
             .content(people.get(randomPerson))
             .image(images.get(randomPerson))
             .title(title)
