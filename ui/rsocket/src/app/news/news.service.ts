@@ -1,16 +1,13 @@
-import {Injectable} from "@angular/core";
-import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {Observable} from "rxjs";
 import {RSocketService} from "../rsocket/rsocket.service";
 import {NewsItem} from "./news.interface";
 import {map} from "rxjs/operators";
 
-@Injectable({
-  providedIn: "root"
-})
 export class NewsService {
 
+  private rsocketService: RSocketService = new RSocketService(7080);
 
-  constructor(private rsocketService: RSocketService) {
+  constructor() {
   }
 
   public news(): Observable<NewsItem> {

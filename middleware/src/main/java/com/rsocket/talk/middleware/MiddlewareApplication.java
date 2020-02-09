@@ -15,7 +15,8 @@ public class MiddlewareApplication implements ApplicationRunner {
     SpringApplication.run(MiddlewareApplication.class, args);
   }
 
-  @Autowired private NewsService newsService;
+  @Autowired
+  private NewsService newsService;
 
   @Override
   public void run(ApplicationArguments args) throws Exception {

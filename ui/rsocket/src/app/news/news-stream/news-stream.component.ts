@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NewsItem} from "../news.interface";
 import {NewsService} from "../news.service";
 
@@ -7,6 +7,7 @@ import {NewsService} from "../news.service";
   selector: 'app-news-stream',
   templateUrl: './news-stream.component.html',
   styleUrls: ['./news-stream.component.scss'],
+  providers: [NewsService]
 })
 export class NewsStreamComponent implements OnInit {
 

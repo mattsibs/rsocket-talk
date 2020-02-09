@@ -3,6 +3,17 @@
     <app-news-wrapper></app-news-wrapper>
   </div>
   <div style="width: 50%">
-    <app-monitor-wrapper></app-monitor-wrapper>
+    <app-news-wrapper></app-news-wrapper>
+  </div>
+  <div style="width: 50%">
+    <app-monitor-wrapper
+      [serverDisplayName]="'News Generation Application'"
+      [serverPort]="9080" [socketName]="'monitor.news.speed'"
+      [monitorSocketName]="'monitor.news.buffer'"></app-monitor-wrapper>
+  </div>
+  <div style="width: 50%">
+    <app-monitor-wrapper [serverDisplayName]="'Middleware Application'"
+                         [serverPort]="7080" [socketName]="'news.speed.consumption'"
+                         [monitorSocketName]="'monitor.news.buffer'"></app-monitor-wrapper>
   </div>
 </div>

@@ -2,15 +2,14 @@ import {IdentitySerializer, JsonSerializer, RSocketClient} from "rsocket-core";
 import RSocketWebSocketClient from "rsocket-websocket-client";
 import {Observable} from "rxjs";
 import {Flowable} from "rsocket-flowable";
-import {Component, Injectable} from "@angular/core";
 
-@Injectable({
-  providedIn: 'root',
-})
 export class RSocketService {
 
   private client: RSocketClient<any, any>;
   private connection: any;
+
+  constructor(private port: number) {
+  }
 
   public init(): void {
     if (!!this.client) {
@@ -33,7 +32,7 @@ export class RSocketService {
         metadataMimeType: 'message/x.rsocket.routing.v0',
       },
       transport: new RSocketWebSocketClient({
-        url: 'ws://localhost:7080/messagesocket'
+        url: `ws://localhost:${this.port}/messagesocket`
       }),
     });
   }
@@ -41,34 +40,41 @@ export class RSocketService {
   public requestStream(socketName: string, requestData: {}, request: number = 2147483647): Observable<any> {
     return new Observable((sink) => {
 
-      this.client.connect()
-          .subscribe({
-        onComplete: socket => {
-          let socketRequestPayload = {
-            data: {...requestData},
-            metadata: String.fromCharCode(socketName.length) + socketName,
-          };
-          let sub = null;
-          socket.requestStream(socketRequestPayload).subscribe({
-            onComplete: () => sink.complete(),
-            onError: error => sink.error(error),
-            onNext: payload => {
-              sink.next(payload);
-              sub.request(1)
-            },
-            onSubscribe: subscription => {
-              sub = subscription;
-              return subscription.request(1);
-            },
-          });
-        },
-        onError: error => {
-          sink.error(error)
-        },
-        onSubscribe: cancel => {
-        }
-      });
+      this.getConnect()
+        .subscribe({
+          onComplete: socket => {
+            let socketRequestPayload = {
+              data: {...requestData},
+              metadata: String.fromCharCode(socketName.length) + socketName,
+            };
+            let sub = null;
+            socket.requestStream(socketRequestPayload).subscribe({
+              onComplete: () => sink.complete(),
+              onError: error => sink.error(error),
+              onNext: payload => {
+                sink.next(payload);
+                sub.request(1)
+              },
+              onSubscribe: subscription => {
+                sub = subscription;
+                return subscription.request(1);
+              },
+            });
+          },
+          onError: error => {
+            sink.error(error)
+          },
+          onSubscribe: cancel => {
+          }
+        });
     });
+  }
+
+  getConnect() {
+    if (this.connection == null) {
+      this.connection = this.client.connect();
+    }
+    return this.connection;
   }
 
   public channel(inputChannel: Observable<any>, socketMetadata, requestData: {}, request: number = 2147483647): Observable<any> {
