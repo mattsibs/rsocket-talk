@@ -1,0 +1,11 @@
+<mat-card>
+  <mat-card-title>{{serverDisplayName}}</mat-card-title>
+  <app-server [bufferOverflow]="bufferSize"
+  ></app-server>
+
+  <mat-slider [(value)]="speed" (change)="speedChange($event)" [min]="0" max="100">
+
+  </mat-slider>
+  <p>News generation rate {{speed}}</p>
+</mat-card>
+

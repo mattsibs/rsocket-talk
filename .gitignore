@@ -11,3 +11,6 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 
 .idea
+*.iml
+ui/rsocket/node_modules/**/*
+ui/rsocket/node_modules/
