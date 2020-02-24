@@ -16,6 +16,6 @@ public class NewsController {
 
   @MessageMapping("get.news")
   public Flux<NewsItem> subscribe() {
-    return newsService.subscribe();
+    return newsService.newsFluxWithBackpressure();
   }
 }

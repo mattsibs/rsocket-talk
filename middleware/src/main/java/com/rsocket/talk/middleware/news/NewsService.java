@@ -41,6 +41,7 @@ public class NewsService {
                 public void onNext(NewsItem newsItem) {
                   long rate = consumptionRatePerSecond.get();
                     log.info("Rate {}", rate);
+
                   try {
                       long sleepRate = 1000 / rate;
                       log.info("Sleeping for {} millis", sleepRate);

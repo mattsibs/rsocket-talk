@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MonitoringService} from "../monitoring.service";
 import {MatSliderChange} from "@angular/material/slider";
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-monitor-wrapper',
@@ -15,6 +13,7 @@ export class MonitorWrapperComponent implements OnInit {
 
   speed = 0;
 
+  newsRate = 0;
 
   @Input()
   private serverDisplayName: string;
@@ -28,12 +27,20 @@ export class MonitorWrapperComponent implements OnInit {
   @Input()
   private monitorSocketName: string;
 
+  @Input()
+  private rateSocketName: string;
+
   private monitoringService: MonitoringService
 
   ngOnInit() {
-    this.monitoringService = new MonitoringService(this.serverPort, this.socketName, this.monitorSocketName);
+    this.monitoringService = new MonitoringService(
+      this.serverPort, this.socketName, this.monitorSocketName, this.rateSocketName);
+
     this.monitoringService.bufferStatus().subscribe(x => {
       this.bufferSize = x;
+    });
+    this.monitoringService.monitorNewsRate().subscribe(x => {
+      this.newsRate = x;
     })
   }
 

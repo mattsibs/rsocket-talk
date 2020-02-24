@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ServerComponent} from './server/server.component';
-import { MonitorWrapperComponent } from './monitor-wrapper/monitor-wrapper.component';
+import {MonitorWrapperComponent} from './monitor-wrapper/monitor-wrapper.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatSliderModule} from "@angular/material/slider";
 import {HttpClientModule} from "@angular/common/http";
+import {GraphModule} from "../graph/graph.module";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {HttpClientModule} from "@angular/common/http";
     CommonModule,
     MatCardModule,
     MatSliderModule,
-    HttpClientModule
+    HttpClientModule,
+    GraphModule
   ]
 })
 export class MonitoringModule { }

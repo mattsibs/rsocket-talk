@@ -22,6 +22,9 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "fbjs": "^0.8.12",
+    "highcharts": "^8.0.0",
+    "highcharts-angular": "^2.4.0",
+    "module": "^1.2.5",
     "rsocket-core": "^0.0.10",
     "rsocket-flowable": "^0.0.10",
     "rsocket-tcp-server": "^0.0.10",
@@ -30,6 +33,7 @@
     "rsocket-websocket-server": "^0.0.10",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
+    "uuid": "^7.0.0",
     "ws": "^5.2.1",
     "zone.js": "~0.9.1"
   },

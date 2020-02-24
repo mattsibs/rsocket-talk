@@ -1,3 +1,10 @@
 <mat-card>
   Buffer overflow: {{bufferOverflow}}
 </mat-card>
+
+<app-dynamic-graph
+  [series1Point]="bufferOverflowGraphPoint"
+  [series2Point]="newsRateGraphPoint"
+  [title]="name + ' Monitor'"
+  [series1Name]="'Lost events'"
+  [series2Name]="'Events Published'"></app-dynamic-graph>

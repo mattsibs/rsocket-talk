@@ -46,10 +46,14 @@ public class NewsService {
     }
   }
 
-  public Flux<NewsItem> subscribe() {
+  public Flux<NewsItem> newsFluxWithBackpressure() {
     return Flux.from(emitterProcessor)
         .onBackpressureBuffer(
             10, monitoringService::bufferOverflow, BufferOverflowStrategy.DROP_OLDEST);
+  }
+
+  public Flux<NewsItem> rawNews() {
+    return Flux.from(emitterProcessor);
   }
 
   public void updateNewsRate(final Long rate) {
