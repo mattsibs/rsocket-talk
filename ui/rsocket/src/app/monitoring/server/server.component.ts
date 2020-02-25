@@ -20,8 +20,8 @@ export class ServerComponent implements OnInit, OnChanges {
   @Input()
   name: string;
 
-  bufferOverflowGraphPoint = { id : '', value: 0};
-  newsRateGraphPoint = { id : '', value: 0};
+  bufferOverflowGraphPoint = { id : '', value: new Date().getTime()};
+  newsRateGraphPoint = { id : '', value: new Date().getTime()};
 
   constructor() { }
 

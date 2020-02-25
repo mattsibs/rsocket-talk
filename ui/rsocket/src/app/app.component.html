@@ -1,23 +1,26 @@
 <div style="width: 100%; display: flex; justify-content: space-between">
   <div style="width: 50%">
+    <div style="width: 100%; padding: 3em">
+      <img src="assets/RSocket.png"/>
+    </div>
     <app-news-wrapper></app-news-wrapper>
   </div>
   <div style="width: 50%">
-    <app-news-wrapper></app-news-wrapper>
-  </div>
-  <div style="width: 50%">
+
     <app-monitor-wrapper
       [serverDisplayName]="'News Generation Application'"
       [serverPort]="9080"
       [socketName]="'monitor.news.speed'"
-      [monitorSocketName]="'monitor.news.buffer'"
-      [rateSocketName]="'monitor.news.rate'">
+      [monitorSocketName]="'monitor.news.buffer'">
 
     </app-monitor-wrapper>
-  </div>
-  <div style="width: 50%">
-    <app-monitor-wrapper [serverDisplayName]="'Middleware Application'"
-                         [serverPort]="7080" [socketName]="'news.speed.consumption'"
-                         [monitorSocketName]="'monitor.news.buffer'"></app-monitor-wrapper>
+    <div>
+      <mat-card>
+      <mat-card-title>Middleware News Consumption</mat-card-title>
+      <app-rate-wrapper
+        [serverPort]="7080" [socketName]="'news.speed.consumption'"
+        [monitorSocketName]="'monitor.news.buffer'"></app-rate-wrapper>
+      </mat-card>
+    </div>
   </div>
 </div>

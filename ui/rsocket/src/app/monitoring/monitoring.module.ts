@@ -6,12 +6,14 @@ import {MatCardModule} from "@angular/material/card";
 import {MatSliderModule} from "@angular/material/slider";
 import {HttpClientModule} from "@angular/common/http";
 import {GraphModule} from "../graph/graph.module";
+import {RateComponent} from "./rate/rate.component";
 
 
 @NgModule({
-  declarations: [ServerComponent, MonitorWrapperComponent],
+  declarations: [ServerComponent, MonitorWrapperComponent, RateComponent],
   exports: [
-    MonitorWrapperComponent
+    MonitorWrapperComponent,
+    RateComponent
   ],
   imports: [
     CommonModule,

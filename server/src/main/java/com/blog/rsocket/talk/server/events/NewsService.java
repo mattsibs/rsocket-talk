@@ -16,7 +16,7 @@ public class NewsService {
 
   private final EmitterProcessor<NewsItem> emitterProcessor;
   private final MonitoringService monitoringService;
-  private final AtomicLong flushSpeed = new AtomicLong(2);
+  private final AtomicLong newsSpeed = new AtomicLong(10);
 
   public NewsService(final MonitoringService monitoringService) {
     this.monitoringService = monitoringService;
@@ -25,7 +25,7 @@ public class NewsService {
 
   @Scheduled(fixedRate = 1000)
   public void reportCurrentTime() {
-    long flushSpeed = this.flushSpeed.get();
+    long flushSpeed = this.newsSpeed.get();
     if (flushSpeed == 0) {
       return;
     }
@@ -46,7 +46,7 @@ public class NewsService {
     }
   }
 
-  public Flux<NewsItem> newsFluxWithBackpressure() {
+  public Flux<NewsItem> newsFluxWithBackPressure() {
     return Flux.from(emitterProcessor)
         .onBackpressureBuffer(
             10, monitoringService::bufferOverflow, BufferOverflowStrategy.DROP_OLDEST);
@@ -57,6 +57,6 @@ public class NewsService {
   }
 
   public void updateNewsRate(final Long rate) {
-    flushSpeed.set(rate);
+    newsSpeed.set(rate);
   }
 }

@@ -20,15 +20,9 @@ export class GraphComponent implements OnInit, OnChanges {
   private series1Point: { id: string, value: number };
   @Input()
   private series1Name: string;
-  @Input()
-  private series2Points: number[] = [];
-  @Input()
-  private series2Point: { id: string, value: number };
-  @Input()
-  private series2Name: string;
 
   private dpsLength = 0;
-  private maxEvents = 20;
+  private maxEvents = 50;
   rerender: Subject<boolean> = new BehaviorSubject(false);
 
   Highcharts: typeof Highcharts = Highcharts;
@@ -48,10 +42,6 @@ export class GraphComponent implements OnInit, OnChanges {
         data: [],
         type: 'line',
         name: this.series1Name
-      }, {
-        data: [],
-        type: 'line',
-        name: this.series2Name
       }]
     };
   }
@@ -59,18 +49,13 @@ export class GraphComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
     if (changes.series1Point) {
-      this.series1Points.push({x: new Date(), y: changes.series1Point.currentValue.value});
+      this.series1Points.push(changes.series1Point.currentValue.value);
       this.dpsLength = this.series1Points.length;
     }
 
-    if (changes.series2Point) {
-      this.series2Points.push(changes.series2Point.currentValue.value);
-      this.dpsLength = this.series2Points.length;
+    if (this.dpsLength > this.maxEvents) {
+      this.series1Points.shift();
     }
-
-    // if (this.dpsLength > this.maxEvents) {
-    //   this.series1Points.shift();
-    // }
 
     this.rerender.next(false);
     this.chartOptions = {
@@ -79,11 +64,8 @@ export class GraphComponent implements OnInit, OnChanges {
         {
           data: this.series1Points,
           type: 'line'
-        },
-        {
-          data: this.series2Points,
-          type: 'line'
-        }]
+        }
+        ]
     };
     this.rerender.next(true);
   }

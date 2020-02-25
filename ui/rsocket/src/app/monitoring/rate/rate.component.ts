@@ -1,22 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from "@angular/core";
 import {MonitoringService} from "../monitoring.service";
 import {MatSliderChange} from "@angular/material/slider";
 
 @Component({
-  selector: 'app-monitor-wrapper',
-  templateUrl: './monitor-wrapper.component.html',
-  styleUrls: ['./monitor-wrapper.component.scss'],
+  selector: 'app-rate-wrapper',
+  templateUrl: './rate.component.html'
 })
-export class MonitorWrapperComponent implements OnInit {
+export class RateComponent implements OnInit {
 
-  bufferSize = 0;
-
-  speed = 0;
-
-  newsRate = 0;
-
-  @Input()
-  private serverDisplayName: string;
+  speed = 2;
 
   @Input()
   private serverPort: number;
@@ -34,9 +26,6 @@ export class MonitorWrapperComponent implements OnInit {
     this.monitoringService = new MonitoringService(
       this.serverPort, this.socketName, this.monitorSocketName);
 
-    this.monitoringService.bufferStatus().subscribe(x => {
-      this.bufferSize = x;
-    });
   }
 
   speedChange($event: MatSliderChange) {

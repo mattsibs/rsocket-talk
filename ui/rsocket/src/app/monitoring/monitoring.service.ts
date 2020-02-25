@@ -8,8 +8,7 @@ export class MonitoringService {
 
   constructor(private port,
               private setSpeedSocketName,
-              private monitorSocketName: string,
-              private newsRateSocketName: string) {
+              private monitorSocketName: string) {
     this.rsocketService = new RSocketService(port);
   }
 
@@ -19,13 +18,8 @@ export class MonitoringService {
       .pipe(map(x => x.data));
   }
 
-  public monitorNewsRate(): Observable<number> {
-    this.rsocketService.init();
-    return this.rsocketService.requestStream(this.newsRateSocketName, {})
-      .pipe(map(x => x.data));
-  }
-
   public setSpeed(speed: number): Observable<any> {
+    this.rsocketService.init();
     return this.rsocketService.requestStream(this.setSpeedSocketName, {speed: speed});
   }
 
